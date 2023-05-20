@@ -1,0 +1,664 @@
+@import './reset.css';
+
+@import url('https://fonts.googleapis.com/css2?family=Electrolize&display=swap');
+
+:root {
+    --app-dark-bg:#1a1d28;
+    --app-light-bg: #f0f4f6;
+    --app-orange:#ff833c;
+    --app-orange-hover:#f87325;
+    --app-border-radius: 10px;
+    --text-color: #f2f4f6;
+    --app-red:#ff3c57;
+    --app-purple:#833cff;   
+}
+
+body {
+    background: rgb(54, 54, 54, 0.9) url("../img/background.jpg") center center / cover no-repeat;
+    backdrop-filter: grayscale(80%);
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+    overflow: hidden;
+}
+
+.container {
+    width: min(100% - 30px, 1080px);
+    margin-inline: auto;
+}
+
+main {
+    padding: 60px 0;
+}
+
+.overlay {
+    height: 100vh;
+    position: absolute;
+    z-index: 222;
+    inset: 0px 0px 0px 0px;
+    backdrop-filter: blur(5px); 
+    background-color: rgb(26, 29, 40, 0.5);
+    display: none;
+}
+
+
+/* -------------------------- */
+/*           Game            */
+/* --------------------------*/
+
+.game {
+    border: none;
+    padding: 15px;
+    width: 600px;
+    height: 320px;
+    height: calc(var(--vh, 1vh) * 100);
+    display: flex;
+    flex-direction: column;
+    margin: 120px auto;
+}
+.word-box {
+    width: 450px;
+    height: 100px;
+    padding: 15px;
+    border-radius: 24px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.2) inset, -1px -1px 1px 0 rgba(255, 255, 255, 0.1) inset;
+    text-align: center;
+    margin: 5px auto;
+    border: 5px solid var(--app-orange);
+}
+
+.wordbox-p {
+    font-size: 50px;
+    font-weight: 600;
+    color: #f87325;
+    line-height: 56px;
+    cursor: default;
+    user-select: none;
+    font-family: Electrolize;
+}
+
+form {
+    margin-top: 5px;
+    text-align: right;
+    width: 380px;
+    height: 80px;
+    padding: 15px;
+    border: none;
+    box-sizing: border-box;
+    border-radius: var(--app-border-radius);
+    margin-inline: auto;
+}
+
+input[type="text"] {
+    width: 350px;
+    height: 50px;
+    padding: 0 15px;
+    border: 3px solid rgba(161, 161, 161, 0.5);
+    background-color: rgba(59, 59, 59, 0.7);
+    border-radius: 24px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 26px 30px -10px, rgba(0, 0, 0, 0.1) 0px 16px 10px -10px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    margin-inline: auto;
+    transition: all 0.25s ease-in;
+}
+
+input[type="text"]:focus {
+    border: 3px solid rgba(161, 161, 161, 0.9);
+}
+
+input::placeholder {
+    color: var(--text-color);
+}
+
+/* -------------------------- */
+/*          buttons          */
+/* --------------------------*/
+
+.start-game, #restart{
+    width: 150px;
+    height: 46px;
+    text-align: center;
+    background-color: var(--app-orange);
+    border: none;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 26px 30px -10px, rgba(0, 0, 0, 0.1) 0px 16px 10px -10px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    transition: all 0.25s ease-in-out;
+    color: #fff;
+    cursor: pointer;
+    position: fixed;
+    top: 7%;
+    right: 20%;
+}
+
+.start-me {
+    width: 150px;
+    height: 46px;
+    text-align: center;
+    background-color: var(--app-orange);
+    border: none;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 26px 30px -10px, rgba(0, 0, 0, 0.1) 0px 16px 10px -10px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    transition: all 0.25s ease-in-out;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 25px;
+}
+
+#restart {
+    position: fixed;
+    top: 7%;
+    left: 20%;
+    visibility: hidden;
+    opacity:0;
+}
+
+#restart.is-visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.not-visible {
+    visibility: hidden;
+    opacity:0;
+}
+
+button:hover {
+    background-color: var(--app-orange-hover);
+}
+
+
+/* -------------------------- */
+/*           Scoreboard       */
+/* --------------------------*/
+
+.scoreboard {
+    width: 350px;
+    height: 450px;
+    padding: 15px;
+    border-radius: var(--app-border-radius);
+    background-color: var(--app-dark-bg);
+    box-shadow: 0px 10px 15px 10px rgb(0 0 0 / 0.10);
+    text-align: center;
+    position: absolute;
+    z-index: 444;
+    top: 50%;
+    right: 50%;
+    left: 50%;
+    transform: translate( -50%, -50%);
+    display: flex;
+    flex-direction: column;
+    margin-inline: auto;
+    display: none;
+    transition: all 0.3s ease-in-out;
+}
+
+#game-restart {
+    width: 150px;
+    height: 46px;
+    text-align: center;
+    background-color: var(--app-orange);
+    border: none;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 26px 30px -10px, rgba(0, 0, 0, 0.1) 0px 16px 10px -10px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    transition: all 0.25s ease-in-out;
+    color: #fff;
+    cursor: pointer;
+    margin-inline: auto;
+}
+
+.total-hits {
+    width: 200px;
+    height: 200px;
+    border: 1px solid rgb(255, 131, 60);
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 50%;
+}
+
+.scoreboard p {
+    font-size: 16px;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.close {
+	position: absolute;
+    top: -2%;
+    right: 0%;
+    /* inset: -10px 20% 35px 93%; */
+    color: #fff;
+	font-size: 28px;
+	font-weight: 600;
+	background-color: transparent;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}
+
+.close:hover, .close:focus {
+  color: var(--app-orange-hover);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.percentage {
+    width: 100%;
+    height: 40px;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: var(--app-border-radius);
+}
+
+.date {
+    border: none;
+    width: 100%;
+    height: 25px;
+}
+
+.date-p {
+    color: rgba(180, 177, 177, 0.9);
+}
+
+.heading p {
+    font-size: 35px;
+    text-transform: uppercase;
+}
+
+.point {
+    font-size: 80px;
+    font-weight: 500;
+    color: var(--app-orange-hover);
+    margin: 0px auto;
+    border: none;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    padding: 10px;
+    text-align: center;
+}
+
+/* -------------------------- */
+/*           Display Hits    */
+/* --------------------------*/
+
+.hits {
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    margin-inline: auto;
+}
+
+.hits p {
+    font-size: 19px;
+    font-weight: 500;
+    color: #fff;
+    cursor: default;
+}
+
+/* -------------------------- */
+/*           score-store     */
+/* --------------------------*/
+
+.score-store {
+    position: fixed;
+    top: 3px;
+    left: 78%;
+    height: 100vh;
+    margin: 0;
+    width: 300px;
+    padding: 10px;
+    z-index: 444;
+    border-radius: var(--app-border-radius);
+    background-color: var(--app-dark-bg);
+    box-shadow: 0px 10px 15px 10px rgb(0 0 0 / 0.10);
+    transition-duration: .25s;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.score-store.is-visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.score-store h4 {
+    font-size: 18px;
+    text-align: center;
+    color: #fff;
+}
+
+.inner-box {
+    border: none;
+    margin-top: 10px;
+    height:100%;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+}
+
+.box {
+    border: 1px solid #fff;
+    width: 100%;
+    height: 35px;
+    padding: 5px;
+    text-align: center;
+    font-size: 20px;
+    color: var(--app-orange);
+}
+
+
+/* -------------------------- */
+/*           Timer           */
+/* --------------------------*/
+.timer {
+    border: none;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: fixed;
+    top: 5%;
+    right: 25%;
+    background-color: #fff;
+    font-size: 40px; 
+    font-weight: 600;
+    padding: 20px;
+    color: var(--app-orange);
+    text-align: center;
+    display: none;
+}
+
+/* -------------------------- */
+/*           Modal           */
+/* --------------------------*/
+
+dialog {
+    width: 550px;
+    height: 350px;
+    background-color: rgba(12, 12, 12);
+    padding: 25px;
+    border-radius: var(--app-border-radius);
+    box-shadow: 0px 10px 15px 10px rgb(0 0 0 / 0.10);
+    text-align: center;
+    margin: auto;
+    animation: 0.25s linear anim;
+}
+
+@keyframes anim {
+    from {
+        opacity: 0;
+        translate: 0 -10px;
+    } to {
+        opacity: 1;
+        translate: 0 0;
+    }
+}
+
+
+dialog::backdrop {
+    backdrop-filter: blur(5px); 
+    background-color: rgb(26, 29, 40, 0.5);
+}
+
+
+dialog p {
+    margin-top: 20px;   
+    font-size: 25px;
+    font-family: Electrolize;
+    color: rgba(255, 255, 255,.7);
+    text-align: center;
+}
+
+
+dialog h2 {
+    font-size: 35px;
+    font-family: Electrolize;
+    color: #fff;
+    text-align: center;
+}
+
+dialog .start-me {
+    top: 66%;
+    right: 44%;
+}
+
+
+.counter {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 888;
+    background-color: rgba(12, 12, 12);
+    padding: 25px;
+    border-radius: var(--app-border-radius);
+    box-shadow: 0px 10px 15px 10px rgb(0 0 0 / 0.10);
+    text-align: center;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: none;
+}
+
+.counter h4 {
+    color: var(--app-orange);
+}
+
+.counter.hide {
+    transform: translate(-50%, -50%) scale(0);
+    animation: hide .2s ease-out;
+}
+
+@keyframes hide {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(0);
+    }
+}
+
+.final {
+    position: fixed;
+    background-color: rgba(12, 12, 12);
+    padding: 10px;
+    top: 50%;
+    left: 50%;
+    z-index: 888;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.final h1 {
+    width: 480px;
+    height: 300px;
+    padding: 15px;
+    font-size: 11rem;
+    text-align: center;
+    color: var(--app-orange);
+}
+
+.final.show {
+    transform: translate(-50%, -50%) scale(1);
+    animation: show .3s ease-in;
+}
+
+@keyframes show {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+    }
+
+    80% {
+        transform: translate(-50%, -50%) scale(1.4);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.number {
+  color: var(--app-orange);
+  position: relative;
+  font-size: 11rem;
+  font-weight: 600;
+  overflow: hidden;
+  width: 450px;
+  height: 250px;
+}
+
+.number span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(120deg);
+  transform-origin: bottom center;
+}
+
+.number span.in {
+    transform: translate(-50%, -50%) rotate(0deg);
+  animation: goIn .5s ease-in-out;
+}
+
+.number span.out {
+  animation: goOut .5s ease-in-out;
+}
+
+@keyframes goIn {
+  0% {
+    transform: translate(-50%, -50%) rotate(120deg);
+  }
+  30% {
+    transform: translate(-50%, -50%) rotate(-20deg);
+  }
+
+  60% {
+    transform: translate(-50%, -50%) rotate(10deg);
+  }
+
+  90%, 100% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+}
+
+@keyframes goOut {
+  0%, 30% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  60% {
+    transform: translate(-50%, -50%) rotate(20deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(-120deg);
+  }
+}
+
+h4 {
+  font-size: 30px;
+  margin: 5px;
+  text-transform: uppercase;
+}
+
+
+/* -------------------------------- */
+/* Media queries                    */
+/* -------------------------------- */
+
+/* 500px and down */
+@media (max-width: 500px) {
+    dialog {
+        height: 360px;
+        padding: 20px;
+    }
+
+
+    dialog p {
+        margin-top: 20px;    
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .start-me {
+        margin-top: 35px;
+    }
+
+    .start-game {
+        right: 8%;
+    }
+
+
+    #restart {
+        left: 8%;
+    }
+
+    .timer {
+        top: 3%;
+        right: 8%;
+    }
+
+    .game {
+        border: none;
+        padding: 10px;
+        width: 400px;
+        height: 250px;
+        margin: 150px auto;
+    }
+    .word-box {
+        width: 350px;
+        height: 150px;
+        padding: 16px;
+    }
+    
+    .wordbox-p {
+        font-size: 40px;
+    }
+
+    .score-store {
+        top: 3px;
+        left: 48%;
+        height: 100vh;
+        width: 250px;
+        padding: 8px;
+        z-index: 444;
+    }
+
+    .box {
+        height: 30px;
+        padding: 3px;
+        text-align: center;
+        font-size: 18px;
+        color: var(--app-orange);
+    }
+
+    .show-highscore {
+        position: fixed;
+        bottom: 5%;
+        right: 10%;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: var(--app-orange);
+    }
+
+    .show-highscore i {
+        font-size: 25px;
+        color: #fff;
+    }
+
+    .show-highscore:hover {
+        background-color: var(--app-orange-hover);
+    }
+    
+}

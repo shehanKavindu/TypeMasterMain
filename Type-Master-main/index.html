@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, intial scale=1.0">
+        <meta name="author" content="Kavindu">
+        <meta name="description" content="Game">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Electrolize&family=Montserrat:wght@400;600;700&display=swap" >
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <title>TypeMaster</title>
+        <link rel="shortcut icon" href="" type="">
+        <link rel="stylesheet" href="assets/style/style.css" media="screen">
+        <script src="assets/script/index.js" type="module"></script>
+    </head>
+    <body>
+        <main>
+            <div class="container">
+                <dialog>
+                      <h2>Challenge</h2>
+                      <p>Redeem your title as the type-master.</p>
+                      <p>90 seconds! type as many words as you see on the screen. How fast can you type?</p>
+                      <button class="start-me">Start Game</button>
+                </dialog>
+                <div class="counter">
+                    <div class="number">
+                      <span class="in">3</span>
+                      <span>2</span>
+                      <span>1</span>
+                      <!-- <span>0</span> -->
+                    </div>
+                    <h4>Get Ready</h4>
+                </div>
+                <div class="final">
+                    <h1>GO</h1>
+                </div>
+                <div class="overlay"></div>
+                <div class="game">
+                    <div class="hits">
+                        <p>Hits: 0 </p>
+                    </div>
+                    <div class="word-box"></div>
+                    <form>
+                        <input type="text" class="input" placeholder="Enter word" disabled required>
+                    </form>
+                </div>
+                <button class="start-game">Start Game</button>
+                <button id="restart">Restart</button>
+
+                <div class="scoreboard">
+                    <div class="close">&times;</div>
+                    <div class="heading">
+                        <p>Scoreboard</p>
+                    </div>
+                    <div class="date">
+                    </div>
+                    <div class="total-hits">
+                        <p>Total points</p>
+                        <div class="point"></div>
+                    </div>
+                    <div class="percentage">
+                        <p class="percent">Progress: </p>
+                    </div>
+                    <button id="game-restart">Restart</button>
+                </div>
+
+                <div class="score-store">
+                    <h4>High Scores</h4>
+                    <div class="inner-box">
+                    </div>
+                </div>
+
+                <div class="timer"></div>
+                <button class="show-highscore"><i class="fa-solid fa-star"></i></button>
+            </div>
+        </main>
+        <script>
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+            window.addEventListener('resize', () => {
+              vh = window.innerHeight * 0.01;
+              document.documentElement.style.setProperty('--vh', `${vh}px`);
+            });
+       </script>
+    </body>
+</html>
+
+.
